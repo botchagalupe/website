@@ -1,0 +1,51 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "../../components/Layout.astro";
+import { formatDate } from "../../utils/dates";
+import { getPostSlug } from "../../utils/posts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => data.draft !== true);
+
+  return posts.map((post) => ({
+    params: { slug: getPostSlug(post) },
+    props: { post }
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const postSlug = getPostSlug(post);
+const { Content } = await render(post);
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  canonicalPath={`/writing/${postSlug}`}
+  type="article"
+>
+  <article class="section article">
+    <div class="container narrow">
+      <a class="back-link" href="/writing">Back to writing</a>
+      <header class="article-header">
+        <p class="muted">{formatDate(post.data.date)}</p>
+        <h1>{post.data.title}</h1>
+        <p class="lede">{post.data.description}</p>
+        {
+          post.data.tags.length > 0 && (
+            <ul class="tag-list" aria-label={`${post.data.title} tags`}>
+              {post.data.tags.map((tag) => <li class="tag">{tag}</li>)}
+            </ul>
+          )
+        }
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

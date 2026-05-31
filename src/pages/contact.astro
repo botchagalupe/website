@@ -1,0 +1,34 @@
+---
+import Layout from "../components/Layout.astro";
+import LinkCard from "../components/LinkCard.astro";
+import { links } from "../data/links";
+import { profile } from "../data/profile";
+
+const contactLinks = links.filter((link) => link.group === "Contact" || link.group === "Profiles");
+---
+
+<Layout
+  title="Contact"
+  description={`Contact ${profile.name} without forms or tracking.`}
+  canonicalPath="/contact"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">Contact</p>
+      <h1>Contact</h1>
+      <p class="lede">Use direct links only. This site does not collect messages or run a contact form.</p>
+      <p>
+        Email:
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        {contactLinks.map((link) => <LinkCard link={link} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

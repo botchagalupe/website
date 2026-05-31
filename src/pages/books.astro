@@ -1,0 +1,36 @@
+---
+import Layout from "../components/Layout.astro";
+import BookCard from "../components/BookCard.astro";
+import { books as bookData } from "../data/books";
+import { profile } from "../data/profile";
+
+const books = [...bookData].sort((a, b) => b.year.localeCompare(a.year));
+---
+
+<Layout
+  title="Books"
+  description={`Books from ${profile.name}, also known as ${profile.handle}.`}
+  canonicalPath="/books"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">Books</p>
+      <h1>Books</h1>
+      <p class="lede">Books by John Willis on DevOps, Deming, AI history, and technology leadership.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {
+        books.length > 0 ? (
+          <div class="grid">
+            {books.map((book) => <BookCard book={book} />)}
+          </div>
+        ) : (
+          <p class="muted">TODO: Add books in src/data/books.ts.</p>
+        )
+      }
+    </div>
+  </section>
+</Layout>

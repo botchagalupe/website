@@ -1,0 +1,41 @@
+---
+import Layout from "../components/Layout.astro";
+import { profile } from "../data/profile";
+---
+
+<Layout
+  title="About"
+  description={`About ${profile.name}, also known as ${profile.handle}.`}
+  canonicalPath="/about"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">About</p>
+      <h1>About {profile.name}</h1>
+      <p class="lede">{profile.shortBio}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article>
+        <h2>About John</h2>
+        {profile.longBio.map((paragraph) => <p>{paragraph}</p>)}
+      </article>
+
+      <article>
+        <h2>Current Focus</h2>
+        <ul>
+          {profile.currentFocus.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+
+      <article>
+        <h2>Skills And Tools</h2>
+        <ul class="tag-list">
+          {profile.skills.map((skill) => <li class="tag">{skill}</li>)}
+        </ul>
+      </article>
+    </div>
+  </section>
+</Layout>

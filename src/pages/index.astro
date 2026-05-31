@@ -1,0 +1,115 @@
+---
+import Layout from "../components/Layout.astro";
+import BookCard from "../components/BookCard.astro";
+import LinkCard from "../components/LinkCard.astro";
+import { books } from "../data/books";
+import { links } from "../data/links";
+import { newsletters } from "../data/newsletters";
+import { profile } from "../data/profile";
+
+const featuredBooks = books.filter((book) => book.featured);
+const mainLinks = links.filter((link) => link.label !== "Newsletters").slice(0, 4);
+const newslettersLink = links.find((link) => link.label === "Newsletters");
+const featuredNewsletters = newsletters.slice(0, 2);
+---
+
+<Layout
+  title={profile.name}
+  description={profile.shortBio}
+  canonicalPath="/"
+  ogImage="/images/botchagalupe-logo.jpeg"
+>
+  <section class="hero section">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Also known as {profile.handle}</p>
+        <h1>{profile.name}</h1>
+        <p class="lede">{profile.tagline}</p>
+        <p>{profile.shortBio}</p>
+        <div class="button-row" aria-label="Primary actions">
+          <a class="button-link" href="/books">Books</a>
+          <a class="button-link secondary" href={newslettersLink?.url ?? "/newsletters"}>Newsletters</a>
+        </div>
+      </div>
+      <img
+        class="hero-image"
+        src="/images/botchagalupe-logo.jpeg"
+        width="200"
+        height="200"
+        alt="Illustrated Botchagalupe logo for John Willis"
+        decoding="async"
+      />
+    </div>
+  </section>
+
+  <section class="section" id="books">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Books</h2>
+        <a href="/books">All books</a>
+      </div>
+      {
+        featuredBooks.length > 0 ? (
+          <div class="grid">
+            {featuredBooks.map((book) => <BookCard book={book} />)}
+          </div>
+        ) : (
+          <p class="muted">TODO: Add featured books in src/data/books.ts.</p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section" id="newsletters" aria-labelledby="newsletters-heading">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="newsletters-heading">Newsletters</h2>
+        {
+          newslettersLink && (
+            <a
+              href={newslettersLink.url}
+              target={newslettersLink.url.startsWith("http") ? "_blank" : undefined}
+              rel={newslettersLink.url.startsWith("http") ? "noopener noreferrer" : undefined}
+            >
+              Open newsletters
+            </a>
+          )
+        }
+      </div>
+      <div class="grid">
+        {
+          featuredNewsletters.map((item) => (
+            <article class="card">
+              <div class="card-header">
+                <h3>{item.title}</h3>
+                {item.status && <span class={`status status-${item.status}`}>{item.status}</span>}
+              </div>
+              <p>{item.description}</p>
+              <p>
+                <a
+                  href={item.url}
+                  target={item.url.startsWith("http") ? "_blank" : undefined}
+                  rel={item.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
+                  Open newsletters
+                </a>
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Main Links</h2>
+        <a href="/links">All links</a>
+      </div>
+      <div class="grid">
+        {mainLinks.map((link) => <LinkCard link={link} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

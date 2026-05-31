@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">John Willis placeholder image</title>
+  <desc id="desc">A simple local placeholder image with the initials JW.</desc>
+  <rect width="640" height="640" fill="#edf7ff"/>
+  <path d="M0 96h640M0 224h640M0 352h640M0 480h640M96 0v640M224 0v640M352 0v640M480 0v640" stroke="#b8d4ff" stroke-width="4" opacity=".7"/>
+  <path d="M0 0h190L0 190Z" fill="#dbeaff"/>
+  <path d="M640 640H430l210-210Z" fill="#ffe6a3"/>
+  <circle cx="320" cy="280" r="168" fill="#004dff"/>
+  <path d="M190 430c28-55 75-82 130-82s102 27 130 82" fill="none" stroke="#ffcf5a" stroke-width="28" stroke-linecap="round"/>
+  <path d="M228 194h48v143c0 35-22 56-58 56-13 0-26-3-38-8l9-41c7 3 14 5 22 5 12 0 17-7 17-21V194Z" fill="#f4f7f2"/>
+  <path d="M322 194h42l25 111 29-111h46l-45 193h-47l-27-103-27 103h-46l-12-52h42l-8-33 28-108Z" fill="#f4f7f2"/>
+  <text x="320" y="540" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="34" font-weight="700" fill="#003cff">Botchagalupe</text>
+</svg>

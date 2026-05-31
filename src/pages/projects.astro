@@ -1,0 +1,36 @@
+---
+import Layout from "../components/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+import { profile } from "../data/profile";
+
+const sortedProjects = [...projects].sort((a, b) => b.year.localeCompare(a.year));
+---
+
+<Layout
+  title="Projects"
+  description={`Projects from ${profile.name}, also known as ${profile.handle}.`}
+  canonicalPath="/projects"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">Projects</p>
+      <h1>Projects</h1>
+      <p class="lede">A static, easy-to-update list of public projects and notes.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {
+        sortedProjects.length > 0 ? (
+          <div class="grid">
+            {sortedProjects.map((project) => <ProjectCard project={project} />)}
+          </div>
+        ) : (
+          <p class="muted">TODO: Add projects in src/data/projects.ts.</p>
+        )
+      }
+    </div>
+  </section>
+</Layout>

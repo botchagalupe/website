@@ -1,0 +1,25 @@
+---
+import type { Book } from "../data/books";
+
+interface Props {
+  book: Book;
+}
+
+const { book } = Astro.props;
+---
+
+<article class="card book-card">
+  <div class="card-header">
+    <h3>{book.title}</h3>
+    <span class="book-year">{book.year}</span>
+  </div>
+  <p>{book.description}</p>
+  <ul class="tag-list" aria-label={`${book.title} tags`}>
+    {book.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+  {book.notes && <p class="muted">{book.notes}</p>}
+  <div class="link-row">
+    <a href={book.url} target="_blank" rel="noopener noreferrer">View on Amazon</a>
+    {book.featured && <span class="featured-label">Featured</span>}
+  </div>
+</article>

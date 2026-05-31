@@ -1,0 +1,27 @@
+---
+import type { LinkItem } from "../data/links";
+
+interface Props {
+  link: LinkItem;
+}
+
+const { link } = Astro.props;
+const isExternal = /^https?:\/\//.test(link.url);
+const displayUrl = isExternal
+  ? new URL(link.url).hostname.replace(/^www\./, "")
+  : link.url.replace(/^mailto:/, "");
+---
+
+<article class="card link-card">
+  <h3>
+    <a
+      href={link.url}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+    >
+      {link.label}
+    </a>
+  </h3>
+  {link.description && <p>{link.description}</p>}
+  <p class="muted">{displayUrl}</p>
+</article>

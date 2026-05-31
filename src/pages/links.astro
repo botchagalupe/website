@@ -1,0 +1,42 @@
+---
+import Layout from "../components/Layout.astro";
+import LinkCard from "../components/LinkCard.astro";
+import { links, type LinkItem } from "../data/links";
+import { profile } from "../data/profile";
+
+const groupedLinks = links.reduce<Record<string, LinkItem[]>>((groups, link) => {
+  const group = link.group ?? "Links";
+  groups[group] = groups[group] ?? [];
+  groups[group].push(link);
+  return groups;
+}, {});
+---
+
+<Layout
+  title="Links"
+  description={`Public links for ${profile.name}.`}
+  canonicalPath="/links"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">Links</p>
+      <h1>Links</h1>
+      <p class="lede">A simple list of public places to find John Willis / Botchagalupe online.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {
+        Object.entries(groupedLinks).map(([group, items]) => (
+          <section class="link-group" aria-labelledby={`links-${group.toLowerCase().replaceAll(" ", "-")}`}>
+            <h2 id={`links-${group.toLowerCase().replaceAll(" ", "-")}`}>{group}</h2>
+            <div class="grid">
+              {items.map((link) => <LinkCard link={link} />)}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

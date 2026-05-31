@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../utils/dates";
+import { getPostSlug } from "../utils/posts";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const postSlug = getPostSlug(post);
+---
+
+<article class="card post-card">
+  <p class="muted">{formatDate(post.data.date)}</p>
+  <h3><a href={`/writing/${postSlug}`}>{post.data.title}</a></h3>
+  <p>{post.data.description}</p>
+  {
+    post.data.tags.length > 0 && (
+      <ul class="tag-list" aria-label={`${post.data.title} tags`}>
+        {post.data.tags.map((tag) => <li class="tag">{tag}</li>)}
+      </ul>
+    )
+  }
+</article>

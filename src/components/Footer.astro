@@ -1,0 +1,16 @@
+---
+import { profile } from "../data/profile";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; {year} {profile.name}.</p>
+    <p>
+      <a href="/contact">Contact</a>
+      <span aria-hidden="true"> / </span>
+      Static site. No tracking.
+    </p>
+  </div>
+</footer>

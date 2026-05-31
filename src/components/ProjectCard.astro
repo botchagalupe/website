@@ -1,0 +1,40 @@
+---
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  primaryLinkLabel?: string;
+}
+
+const { project, primaryLinkLabel = "Project" } = Astro.props;
+---
+
+<article class="card project-card">
+  <div class="card-header">
+    <h3>{project.title}</h3>
+    <span class={`status status-${project.status}`}>{project.status}</span>
+  </div>
+  <p>{project.description}</p>
+  <p class="muted">{project.year}</p>
+  <ul class="tag-list" aria-label={`${project.title} tags`}>
+    {project.tags.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+  {project.notes && <p class="muted">{project.notes}</p>}
+  <div class="link-row">
+    {
+      project.url && (
+        <a href={project.url} target="_blank" rel="noopener noreferrer">
+          {primaryLinkLabel}
+        </a>
+      )
+    }
+    {
+      project.repo && (
+        <a href={project.repo} target="_blank" rel="noopener noreferrer">
+          Repository
+        </a>
+      )
+    }
+    {project.featured && <span class="featured-label">Featured</span>}
+  </div>
+</article>

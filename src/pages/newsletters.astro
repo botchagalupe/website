@@ -1,0 +1,50 @@
+---
+import Layout from "../components/Layout.astro";
+import { newsletters } from "../data/newsletters";
+import { profile } from "../data/profile";
+---
+
+<Layout
+  title="Newsletters"
+  description={`Newsletters and updates from ${profile.name}, also known as ${profile.handle}.`}
+  canonicalPath="/newsletters"
+>
+  <section class="section page-intro">
+    <div class="container narrow">
+      <p class="eyebrow">Newsletters</p>
+      <h1>Newsletters</h1>
+      <p class="lede">A static home for newsletters archives, updates, and links.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        {
+          newsletters.map((item) => (
+            <article class="card">
+              <div class="card-header">
+                <h2>{item.title}</h2>
+                {item.status && <span class={`status status-${item.status}`}>{item.status}</span>}
+              </div>
+              <p>{item.description}</p>
+              <p>
+                <a
+                  href={item.url}
+                  target={item.url.startsWith("http") ? "_blank" : undefined}
+                  rel={item.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
+                  Open newsletters
+                </a>
+              </p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="muted">
+        This page is static and does not collect email addresses. Add subscription links here
+        only as normal links.
+      </p>
+    </div>
+  </section>
+</Layout>

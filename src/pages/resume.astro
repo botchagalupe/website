@@ -1,0 +1,76 @@
+---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import Layout from "../components/Layout.astro";
+import { profile } from "../data/profile";
+import { resume } from "../data/resume";
+
+const resumePdfExists = existsSync(join(process.cwd(), "public/files/resume.pdf"));
+---
+
+<Layout
+  title="Resume"
+  description={`Static resume for ${profile.name}.`}
+  canonicalPath="/resume"
+>
+  <section class="section page-intro resume-actions">
+    <div class="container narrow">
+      <p class="eyebrow">Resume</p>
+      <h1>{resume.name}</h1>
+      <p class="lede">{resume.headline}</p>
+      <p>{resume.summary}</p>
+      {
+        resumePdfExists ? (
+          <p><a class="button-link" href="/files/resume.pdf">Download PDF</a></p>
+        ) : (
+          <p class="muted">TODO: Add public/files/resume.pdf to show a PDF download link.</p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section resume-page">
+    <div class="container narrow">
+      <section>
+        <h2>Experience</h2>
+        <div class="stack">
+          {
+            resume.experience.map((item) => (
+              <article>
+                <h3>{item.role}</h3>
+                <p class="muted">
+                  {item.organization} / {item.start} - {item.end}
+                </p>
+                <ul>
+                  {item.highlights.map((highlight) => <li>{highlight}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="stack">
+          {
+            resume.education.map((item) => (
+              <article>
+                <h3>{item.school}</h3>
+                <p>{item.degree}</p>
+                <p class="muted">{item.year}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <ul class="tag-list">
+          {resume.skills.map((skill) => <li class="tag">{skill}</li>)}
+        </ul>
+      </section>
+    </div>
+  </section>
+</Layout>
