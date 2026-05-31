@@ -381,6 +381,27 @@ th {
   gap: var(--space-4);
 }
 
+.about-john-horizontal {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.4fr) minmax(0, 1.6fr);
+  gap: var(--space-6);
+  align-items: start;
+  border-block: 1px solid var(--color-border);
+  padding-block: var(--space-6);
+}
+
+.about-john-horizontal h2 {
+  margin-bottom: 0;
+}
+
+.about-copy {
+  font-size: var(--font-size-md);
+}
+
+.about-copy > :last-child {
+  margin-bottom: 0;
+}
+
 .card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -552,6 +573,13 @@ th {
 
   .hero-image {
     width: min(100%, 260px);
+  }
+}
+
+@media (max-width: 520px) {
+  .about-john-horizontal {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
 }
 

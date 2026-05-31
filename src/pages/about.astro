@@ -17,25 +17,29 @@ import { profile } from "../data/profile";
   </section>
 
   <section class="section">
-    <div class="container content-grid">
-      <article>
+    <div class="container stack">
+      <article class="about-john-horizontal">
         <h2>About John</h2>
-        {profile.longBio.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="about-copy">
+          {profile.longBio.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
       </article>
 
-      <article>
-        <h2>Current Focus</h2>
-        <ul>
-          {profile.currentFocus.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
+      <div class="content-grid">
+        <article>
+          <h2>Current Focus</h2>
+          <ul>
+            {profile.currentFocus.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
 
-      <article>
-        <h2>Skills And Tools</h2>
-        <ul class="tag-list">
-          {profile.skills.map((skill) => <li class="tag">{skill}</li>)}
-        </ul>
-      </article>
+        <article>
+          <h2>Skills And Tools</h2>
+          <ul class="tag-list">
+            {profile.skills.map((skill) => <li class="tag">{skill}</li>)}
+          </ul>
+        </article>
+      </div>
     </div>
   </section>
 </Layout>
