@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  site: "https://botchgalupe.ai",
+  site: "https://botchagalupe.ai",
   output: "static",
   integrations: [sitemap()],
   adapter: cloudflare()
